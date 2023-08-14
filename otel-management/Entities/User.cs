@@ -1,30 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace otel_management.Entities
 {
     public class User
     {
-        [Key]
-        public int ID { get; set; }
+        public int Id { get; set; }
         [Required]
-        [StringLength(30)]
-        public string? KullanıcıAdı { get; set; }
-
+        public string Username { get; set; }
         [Required]
-        [StringLength(100)]
-        public string? KullanıcıSifre { get; set; }
-       
-        
-        [StringLength(50)]
-        public string? AdSoyad { get; set; } = null;
+        public string Password { get; set; }
+        public string FullName { get; set; } = null;
+        public string Email { get; set; } = null;
+        public bool IsAdmin { get; set; } = false;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        [StringLength(50)]
-        public string? KullanıcıMail { get; set; } = null;
-
-        public bool isAdmin { get; set; } = false;
-
-        public DateTime CreateAt { get; set; }=DateTime.Now;
+        public virtual ICollection<Reservation> Reservations { get; set; }
     }
-    
 }

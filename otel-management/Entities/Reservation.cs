@@ -1,0 +1,15 @@
+﻿namespace otel_management.Entities
+{
+    public class Reservation
+    {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int RoomId { get; set; }
+        public string CheckInDate { get; set; }
+        public string CheckOutDate { get; set; }
+        public string TotalPrice { get; set; }
+
+        public virtual User User { get; set; }
+        public virtual Room Room { get; set; }
+    }
+}
