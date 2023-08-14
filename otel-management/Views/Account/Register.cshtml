@@ -3,7 +3,6 @@
     ViewData["Title"] = "Kayıt Ol";
 }
 
-
 <div class="row">
     <div class="col-4 offset-4">
         <h1 class="display-4 border-bottom text-center">@ViewData["Title"]</h1>
@@ -12,28 +11,42 @@
 
 <div class="row">
     <div class="col">
-        <form method="post" >
+        <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="AdSoyad" class="form-label">Ad Soyad</label>
+                <input asp-for="AdSoyad" class="form-control" placeholder="tam adınızı giriniz.." />
+                <span asp-validation-for="AdSoyad" class="text-danger small"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Email" class="form-label">E-posta</label>
+                <input asp-for="Email" class="form-control" placeholder="e-posta adresinizi giriniz.." />
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+
             <div class="form-group mb-3">
                 <label asp-for="KullanıcıAd" class="form-label">Kullanıcı Adı</label>
                 <input asp-for="KullanıcıAd" class="form-control" placeholder="kullanıcı adınızı giriniz.." />
                 <span asp-validation-for="KullanıcıAd" class="text-danger small"></span>
             </div>
+
             <div class="form-group mb-3">
                 <label asp-for="KullanıcıSifre" class="form-label">Şifre</label>
                 <input asp-for="KullanıcıSifre" type="password" class="form-control" placeholder="şifrenizi giriniz..." />
                 <span asp-validation-for="KullanıcıSifre" class="text-danger small"></span>
             </div>
-             <div class="form-group mb-3">
+
+            <div class="form-group mb-3">
                 <label asp-for="KullanıcıSifreTekrar" class="form-label">Şifre Tekrar</label>
                 <input asp-for="KullanıcıSifreTekrar" type="password" class="form-control" placeholder="şifrenizi tekrar giriniz..." />
                 <span asp-validation-for="KullanıcıSifreTekrar" class="text-danger small"></span>
             </div>
+
             <div class="form-group d-grid mb-3">
                 <button type="submit" class="btn btn-primary d-block">Kayıt Ol</button>
             </div>
         </form>
     </div>
 </div>
-
-

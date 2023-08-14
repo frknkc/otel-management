@@ -9,8 +9,8 @@ namespace otel_management.Entities
         public string Username { get; set; }
         [Required]
         public string Password { get; set; }
-        public string FullName { get; set; } = null;
-        public string Email { get; set; } = null;
+        public string? FullName { get; set; } 
+        public string? Email { get; set; }
         public bool IsAdmin { get; set; } = false;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
