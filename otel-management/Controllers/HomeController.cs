@@ -22,6 +22,18 @@ namespace otel_management.Controllers
         {
             return View();
         }
+        public IActionResult Hizmetler()
+        {
+            return View();
+        }
+        public IActionResult Odalar()
+        {
+            return View();
+        }
+        public IActionResult İletisim()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

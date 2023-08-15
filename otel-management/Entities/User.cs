@@ -13,7 +13,6 @@ namespace otel_management.Entities
         public string? Email { get; set; }
         public bool IsAdmin { get; set; } = false;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-
         public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }

@@ -2,7 +2,57 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+  <div class="row">
+
+    <div class="col-lg-8">
+      <h2>Hoş Geldiniz!</h2>
+      <p>Otelimizde rezervasyon yapmak istediğiniz tarih aralığını lütfen giriniz</p>
+    </div>
+    <div class="col-lg-4">
+      <div class="card">
+          <h5 class="card-title">Rezervasyon</h5>
+          <form>
+            <div class="form-group" s>
+              <label for="checkIn">Giriş Tarihi</label>
+              <input type="date" class="form-control" id="checkIn">
+            </div>
+            <div class="form-group">
+              <label for="checkOut">Çıkış Tarihi</label>
+              <input type="date" class="form-control" id="checkOut">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Odaları Listele</button>
+          </form>
+        </div>
+    </div>
+  </div>
 </div>
+<style>form{
+    height: 400px;
+    width: 400px;
+    background-color: rgba(255,255,255,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 500%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 30px 35px;
+    margin 0 auto;
+}
+form *{
+    font-family: 'Poppins',sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+form h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+</style>

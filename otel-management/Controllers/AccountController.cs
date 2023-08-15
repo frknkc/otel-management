@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using otel_management.Data;
 using otel_management.Entities;
 using otel_management.Models;
+using System.Security.Claims;
 
 namespace otel_management.Controllers
 {
@@ -23,7 +26,27 @@ namespace otel_management.Controllers
         {
             if (ModelState.IsValid)
             {
-                // login işlemleri
+                User user = _databaseCntx.Users.SingleOrDefault(x => x.Username.ToLower() == model.KullanıcıAd.ToLower() && x.Password == model.KullanıcıSifre);
+
+                if (user != null )
+                {
+                    List<Claim> claims = new List<Claim>();
+                    claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
+                    claims.Add(new Claim(ClaimTypes.Name, user.FullName ?? string.Empty));
+                    claims.Add(new Claim("Username", user.Username));
+
+                    ClaimsIdentity identity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
+                    ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
+
+                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
+
+                    return RedirectToAction("Index", "Home");
+
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Kullanıcı Adı veya Şifre yanlış!!!");
+                }
             }
             return View(model);
         }
@@ -38,6 +61,11 @@ namespace otel_management.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (_databaseCntx.Users.Any(x => x.Username.ToLower() == model.KullanıcıAd.ToLower())) 
+                {
+                    ModelState.AddModelError(nameof(model.KullanıcıAd), "Lütfen farklı bir kullanıcı adı giriniz.");
+                    return View(model);
+                }
                 User user = new()
                 {
                     Username = model.KullanıcıAd,
@@ -64,6 +92,19 @@ namespace otel_management.Controllers
         public IActionResult Profile()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult ProfileChangeFullName(string fullname)
+        {
+
+            return View();
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return RedirectToAction(nameof(Login));
         }
     }
 }
