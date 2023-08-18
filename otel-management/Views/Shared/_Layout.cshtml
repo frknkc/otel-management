@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - otel_management</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/toastrjs/toastr.css" />
+
     <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
     <link rel="stylesheet" href="~/otel_management.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -31,12 +34,23 @@
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
+
                              <li class="nav-item ms-auto">
                                      <a class="navbar-brand text-white" asp-area="" asp-controller="Account" asp-action="Profile"><i class="fa-solid fa-user"></i> @User.FindFirst("Username").Value.ToUpper()</a>
                           </li>
                           <li class="nav-item">
                                      <a class="navbar-brand text-white" asp-area="" asp-controller="Account" asp-action="Logout"><i class="fa-solid fa-right-to-bracket"></i> Çıkış Yap</a>
                           </li>
+                          if (User.IsInRole("admin"))
+                            {
+                                               <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle text-white text-large" asp-action="Index" asp-controller="Admin" role="button" data-bs-toggle="dropdown" aria-expanded="false">Administrator</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a asp-action="Index" asp-controller="User" class="dropdown-item">Users</a></li>
+                                            </ul>
+                                        </li>
+                            }
+                              
                         }
                         else
                         {
@@ -47,8 +61,7 @@
                                 <a class="navbar-brand text-white" asp-area="" asp-controller="Account" asp-action="Register"><i class="fa-solid fa-user-plus fa-beat"></i> Kayıt Ol</a>
                             </li> 
                         }
-                         
-                    </ul>
+                        <ul/>
                 </div>
             </div>
         </nav>
@@ -66,6 +79,8 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/toastrjs/toastr.min.js"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

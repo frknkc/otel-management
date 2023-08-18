@@ -24,4 +24,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="images\" />
+    <Folder Include="Entities\" />
+  </ItemGroup>
+
 </Project>

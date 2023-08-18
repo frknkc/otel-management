@@ -11,6 +11,4 @@ namespace otel_management.Data
         public virtual DbSet<Reservation> Reservations { get; set; }
         public virtual DbSet<Service> Services { get; set; }
     }
-
-
 }

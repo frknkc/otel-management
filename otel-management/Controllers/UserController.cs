@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace otel_management.Controllers
 {
-    [Authorize]
-    public class Admin : Controller
+    public class UserController : Controller
     {
         public IActionResult Index()
         {

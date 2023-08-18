@@ -1,0 +1,19 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "AccessDenied";
+}
+<div>
+
+<div class="row">
+    <div class="col-4 offset-4">
+        <h3 class="display-4 border-bottom text-center"></i>@ViewData["Title"]</h3>
+    </div>
+
+
+<div class="row">
+<div class="col text-center">
+    <h1 class="text-danger text-center"><i class="fa-solid fa-ban fa-3x fa-shake" style="color: #ff0000;"></i></h1>
+	<p>İlgili sayfaya erişiminiz yoktur.</p>
+	<a asp-action="Index" asp-controller="Home" class="btn btn-primary">Anasayfaya Dön!!</a>
+</div>
+</div>

@@ -2,7 +2,7 @@
 {
     public class Room
     {
-        public int Id { get; set; }
+        public  Guid Id { get; set; }
         public string RoomNumber { get; set; }
         public string RoomPhoto { get; set; }
         public string RoomDetail { get; set; }

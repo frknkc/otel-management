@@ -1,7 +1,20 @@
-﻿
+﻿@using otel_management.Entities;
+@model List<User>
 
-<div class="row">
-<div class="col">
-	<h1 class="">Admin Page</h1>
-</div>
-</div>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User List</title>
+</head>
+<body>
+    <h1>User List</h1>
+   
+    <ul>
+        @*@foreach (var user in Model)
+        {
+            <li>@user.Username | @user.Password |  @user.FullName |  @user.Email </li>
+        }*@
+    </ul>
+</body>
+</html>

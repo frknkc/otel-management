@@ -5,7 +5,6 @@
 <div>
 
 
-
 <div class="row mt-4">
 <div class="col-4">
     <div class="d-flex justify-content-center align-items-center" style="height: 50vh;display:flex;justify-content:center">
@@ -15,15 +14,137 @@
             <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
         </div>
 
-        <form method="post" asp-action="ProfileChangeName">Ad: &nbsp;
-            <label class="form-label small">
-                <input name="fullname" style="width:300px" type="text" class="form-control" placeholder=""></label>
-            <button class="btn btn-secondary">
-            <i class="fa-regular fa-floppy-disk me-2"></i> &nbsp; Kaydet
-        </button>
+         <form  method="post" asp-action="ProfileChangeFullName" >
+             <label class="form-label small">Yeni Ad Soyad</label>
+            <div class="form-group">
+                <div class="input-group mb-3 large">
+                    <input name="fullname" type="text" class="form-control" placeholder="yeni kullanıcı adı giriniz" value="@ViewData["FullName"]" />
+                    <button class="btn btn-secondary small" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Kaydet</button>
+                </div>
+            </div>
         </form>
+        <form method="post" asp-action="ProfileChangePassword">
+            <div class="form-group">
+                <label class="form-label large">Yeni Şifre</label>
+                <div class="input-group mb-3">
+                    <input name="password" type="password" class="form-control" placeholder="yeni şifre giriniz" />
+                    <button class="btn btn-secondary small" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Kaydet</button>
+                </div>
+            </div>
+        </form>
+        <form method="post" asp-action="ProfileChangeMail">
+            <div class="form-group">
+                <label class="form-label large">Yeni Mail</label>
+                <div class="input-group mb-3">
+                    <input name="mail" type="text" class="form-control" placeholder="example@mail.com" value="@ViewData["Email"]" />
+                    <button class="btn btn-secondary small" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Kaydet</button>
+                </div>
+            </div>
+        </form>
+        
     </div>
 </div>
 </div>
 </div>
+@section Scripts{
+        @if (ViewData["result"] != null && ViewData["result"] == "PasswordChanged")
+        {
+            <script>
+                toastr["success"]("Şifreniz değiştirilmiştir.", "Şifre değişti!")
+                </script>
+        }
+        @if (ViewData["result"] != null && ViewData["result"] == "FullNameChanged")
+        {
+                    <script>
+                        toastr["success"]("Ad-Soyad değiştirilmiştir.", "Ad-Soyad değişti!")
+                        </script>
+        }
+        @if (ViewData["result"] != null && ViewData["result"] == "MailChanged")
+        {
+                            <script>
+                                toastr["success"]("Ad-Soyad değiştirilmiştir.", "Ad-Soyad değişti!")
+                                </script>
+        }
+}
 
+
+<style>
+
+
+.form-label {
+  font-size: 1rem;
+  font-weight: 600px;
+  
+}
+
+.input-group{
+    position: relative;
+    display: flex;
+    width: 200px;
+}
+.input-group > input {
+  border-radius: 0;
+  border: 1px solid #ccc;
+  padding:1rem 1rem;
+}
+
+.btn-secondary {
+  background-color: #ccc;
+  border: 1px solid #ccc;
+  color: #333;
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0;
+}
+
+.btn-secondary:hover {
+  background-color: #bbb;
+  border: 1px solid #bbb;
+  color: #222;
+}
+
+.fa-solid {
+  font-size: 1rem;
+}
+form {
+    height: 400px;
+    width: 600px;
+    background-color: rgba(255,255,255,0.13);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+    margin-bottom: 20px; 
+    margin-left :50px;
+}
+
+input {
+    
+    height: 50px;
+    width: 500px;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0px 100px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+::placeholder {
+    color: #e5e5e5;
+}
+
+button {
+    margin-top: 30px;
+    width: 100%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+}</style>
