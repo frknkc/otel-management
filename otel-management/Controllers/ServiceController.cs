@@ -26,6 +26,7 @@ namespace otel_management.Controllers
             ServiceDetail=x.ServiceDetail,  
             ServicePhoto=x.ServicePhoto,
             ServicePrice=x.ServicePrice,
+            IsAvaliable=x.IsAvaliable,
             Id=x.Id,
         }).ToList();
 
@@ -51,6 +52,7 @@ namespace otel_management.Controllers
                 service.ServiceDetail = model.ServiceDetail;
                 service.ServicePhoto = model.ServicePhoto;
                 service.ServicePrice= model.ServicePrice; 
+                service.IsAvaliable= model.IsAvaliable;
                 service.Id=model.Id;
 
                
@@ -73,7 +75,7 @@ namespace otel_management.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_databaseContext.Services.Any(x => x.ServiceName.ToLower() == model.ServiceName.ToLower()))
+                if (_databaseContext.Services.Any(x => x.ServiceName.ToLower() == model.ServiceName.ToLower() && x.Id != id))
                 {
                     ModelState.AddModelError(nameof(model.ServiceName), "Lütfen farklı bir hizmet adı giriniz.");
                     return View(model);
@@ -104,13 +106,13 @@ namespace otel_management.Controllers
 
             if (service != null)
             {
-                if (service.IsAvaliable == true)
+                if (service.IsAvaliable == false)
                 {
-                    service.IsAvaliable = false;
+                    service.IsAvaliable = true;
                 }
                 else
                 {
-                    service.IsAvaliable = true;
+                    service.IsAvaliable = false;
                 }
                 _databaseContext.SaveChanges();
             }

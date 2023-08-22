@@ -1,13 +1,13 @@
 ﻿@using otel_management.Entities;
-@model List<Service>
+@model List<ServiceViewModel>
 
 <div class="container mt-5">
   <h2>Hizmetlerimiz</h2>
 
 <div class="container mt-5">
     <h2>Hizmetlerimiz</h2>
-    <div cl@*ass="row">
-            @foreach (var hizmet in Model)
+    <div class="row">
+            @foreach (ServiceViewModel hizmet in Model)
             {
                 <div class="col-md-4 mb-4">
                     <div class="card">
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                 </div>
-            }*@
+            }
     </div>
 </div>
 </div>

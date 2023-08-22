@@ -25,6 +25,7 @@ namespace otel_management.Controllers
 			Id = x.Id,
 			RoomDetail = x.RoomDetail,
 			RoomNumber = x.RoomNumber,
+			RoomPhoto = x.RoomPhoto,
 			BedCount = x.BedCount,
 			RoomPrice = x.RoomPrice,
 			IsAvailable = x.IsAvailable,
@@ -44,13 +45,14 @@ namespace otel_management.Controllers
 			{
 				if (_databaseContext.Rooms.Any(x => x.RoomNumber.ToLower() == model.RoomNumber.ToLower()))
 				{
-					ModelState.AddModelError(nameof(model.RoomNumber), "Lütfen farklı bir oda numaras giriniz.");
+					ModelState.AddModelError(nameof(model.RoomNumber), "Lütfen farklı bir oda numarası giriniz.");
 					return View(model);
 				}
 				Room room = new Room();
 				room.RoomDetail = model.RoomDetail;
 				room.RoomNumber = model.RoomNumber;	
 				room.IsAvailable = model.IsAvailable;
+				room.RoomPhoto = model.RoomPhoto;
 				room.RoomPrice = model.RoomPrice;
 				room.BedCount = model.BedCount;
 				_databaseContext.Rooms.Add(room);
@@ -72,7 +74,7 @@ namespace otel_management.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				if (_databaseContext.Rooms.Any(x => x.RoomNumber.ToLower() == model.RoomNumber.ToLower()))
+				if (_databaseContext.Rooms.Any(x => x.RoomNumber.ToLower() == model.RoomNumber.ToLower() && x.Id != id))
 				{
 					ModelState.AddModelError(nameof(model.RoomNumber), "Lütfen farklı bir oda numarası giriniz.");
 					return View(model);

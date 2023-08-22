@@ -25,7 +25,6 @@
 		<thead>
 			<tr>
 				<th>Oda Numarası</th>
-				<th>Oda Fotoğrafı</th>
 				<th>Oda Kişi Sayısı</th>
 				<th>Oda Fotoğrafı</th>
 				<th>Oda Detayları</th>
@@ -38,15 +37,14 @@
 				{
 							<tr>
 								<td>@room.RoomNumber</td>
-								<td>@room.RoomPhoto</td>
 								<td>@room.BedCount</td>
 								<td>@room.RoomPhoto</td>
 								<td>@room.RoomDetail</td>
 								<td>@room.RoomPrice</td>
 								<td>@room.IsAvailable</td>
 								<td class="text-and">
-									<a asp-action="RezervRoom" asp-route-id="@room.Id" class="btn btn-info btn-sm text-white"><i class="fa-regular fa-cross fa-bounce fa-xs"></i> Rezerv Değiştir</a>
-									<a asp-action="Edit" asp-route-id="@room.Id" class="btn btn-info btn-sm text-white"><i class="fa fa-edit me-2"></i>Düzenle</a>
+									<a asp-action="RezervRoom" asp-route-id="@room.Id" class="btn btn-info btn-sm text-white"onclick="return confirm('@room.RoomNumber numaralı odanın rezerv değişikliğini yapmak istediğinize emin misiniz?')"><i class="fa-regular fa-cross fa-bounce fa-xs"></i> Rezerv Değiştir</a>
+									<a asp-action="EditRoom" asp-route-id="@room.Id" class="btn btn-info btn-sm text-white"><i class="fa fa-edit me-2"></i>Düzenle</a>
 									<a asp-action="DeleteRoom" asp-route-id="@room.Id"class="btn btn-info btn-sm text-white" onclick="return confirm('@room.RoomNumber numaralı odayı silmek istediğinizden emin misiniz?')"><i class="fa fa-edit me-2"></i>Sil</a>
 								</td>
 							</tr>

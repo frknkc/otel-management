@@ -59,7 +59,7 @@ namespace otel_management.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("Reservations", (string)null);
                 });
 
             modelBuilder.Entity("otel_management.Entities.Room", b =>
@@ -91,7 +91,7 @@ namespace otel_management.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rooms");
+                    b.ToTable("Rooms", (string)null);
                 });
 
             modelBuilder.Entity("otel_management.Entities.Service", b =>
@@ -123,7 +123,7 @@ namespace otel_management.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
                 });
 
             modelBuilder.Entity("otel_management.Entities.User", b =>
@@ -157,7 +157,7 @@ namespace otel_management.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("otel_management.Entities.Reservation", b =>

@@ -9,7 +9,7 @@ namespace otel_management.Models
         public string ServicePhoto { get; set; }
         public string ServiceDetail { get; set; }
 		public string? ServicePrice { get; set; }
-        public bool IsAvaliable { get; set; } = true;
+        public bool IsAvaliable { get; set; } 
 
 
     }

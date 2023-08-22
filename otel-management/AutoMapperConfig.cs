@@ -11,8 +11,8 @@ namespace otel_management
             CreateMap<User, UserViewModel>().ReverseMap();
             CreateMap<User, CreateUserModel>().ReverseMap();
             CreateMap<User, EditUserModel>().ReverseMap();
-            CreateMap<User, RoomViewModel>().ReverseMap();
-            CreateMap<User, ServiceViewModel>().ReverseMap();
+            CreateMap<Room, RoomViewModel>().ReverseMap();
+            CreateMap<Service, ServiceViewModel>().ReverseMap();
 
 
         }

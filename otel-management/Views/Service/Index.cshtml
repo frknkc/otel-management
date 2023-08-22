@@ -35,19 +35,19 @@
 		<tbody>
 				@foreach (ServiceViewModel service in Model)
 				{
-								<tr>
-									<td>@service.Id</td>
-									<td>@service.ServiceName</td>
-									<td>@service.ServicePhoto</td>
-									<td>@service.ServiceDetail</td>
-									<td>@service.ServicePrice</td>
-									<td>@service.IsAvaliable</td>
-									<td class="text-and">
-										<a asp-action="RezervService" asp-route-id="@service.Id" class="btn btn-info btn-sm text-white"><i class="fa-regular fa-cross fa-bounce fa-xs"></i> Rezerv Değiştir</a>
-										<a asp-action="Edit" asp-route-id="@service.Id" class="btn btn-info btn-sm text-white"><i class="fa fa-edit me-2"></i>Düzenle</a>
-										<a asp-action="DeleteService" asp-route-id="@service.Id"class="btn btn-info btn-sm text-white" onclick="return confirm('@service.ServiceName adlı hizmeti silmek istediğinizden emin misiniz?')"><i class="fa fa-edit me-2"></i>Sil</a>
-									</td>
-								</tr>
+						<tr>
+							<td>@service.Id</td>
+							<td>@service.ServiceName</td>
+							<td>@service.ServicePhoto</td>
+							<td>@service.ServiceDetail</td>
+							<td>@service.ServicePrice</td>
+							<td>@service.IsAvaliable</td>
+							<td class="text-and">
+									<a asp-action="RezervService" asp-route-id="@service.Id" class="btn btn-info btn-sm text-white" onclick="return confirm('@service.ServiceName adlı hizmetin rezerv değişikliğini yapmak istediğinize emin misiniz?')"><i class="fa-regular fa-cross fa-bounce fa-xs"></i> Rezerv Değiştir</a>
+								<a asp-action="EditService" asp-route-id="@service.Id" class="btn btn-info btn-sm text-white"><i class="fa fa-edit me-2"></i>Düzenle</a>
+								<a asp-action="DeleteService" asp-route-id="@service.Id"class="btn btn-info btn-sm text-white" onclick="return confirm('@service.ServiceName adlı hizmeti silmek istediğinizden emin misiniz?')"><i class="fa fa-edit me-2"></i>Sil</a>
+							</td>
+						</tr>
 				}
 		</tbody>
 	</table>
