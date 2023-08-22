@@ -1,0 +1,57 @@
+﻿@using otel_management.Entities;
+@model List<RoomViewModel>
+@{
+	ViewData["Title"] = "Odalar İçin Bilgi Değişikliği";
+}
+
+
+	<div class="row">
+<div class="col">
+	<h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+</div><br />
+
+
+<div class="row">
+	<div class="col">
+		<a asp-action="CreateRoom" class="btn btn-primary btn-sm"><i class="fa fa-plus me-2"></i>Oda Ekle</a>
+	</div>
+</div>
+
+
+<div class="row">
+<div class="col">
+	<table class="table table-hover-blue table-sm text-white">	
+		<thead>
+			<tr>
+				<th>Oda Numarası</th>
+				<th>Oda Fotoğrafı</th>
+				<th>Oda Kişi Sayısı</th>
+				<th>Oda Fotoğrafı</th>
+				<th>Oda Detayları</th>
+				<th>Oda Fiyatı</th>
+				<th>Rezerv Durumu</th>
+			</tr>
+		</thead>
+		<tbody>
+				@foreach (RoomViewModel room in Model)
+				{
+							<tr>
+								<td>@room.RoomNumber</td>
+								<td>@room.RoomPhoto</td>
+								<td>@room.BedCount</td>
+								<td>@room.RoomPhoto</td>
+								<td>@room.RoomDetail</td>
+								<td>@room.RoomPrice</td>
+								<td>@room.IsAvailable</td>
+								<td class="text-and">
+									<a asp-action="RezervRoom" asp-route-id="@room.Id" class="btn btn-info btn-sm text-white"><i class="fa-regular fa-cross fa-bounce fa-xs"></i> Rezerv Değiştir</a>
+									<a asp-action="Edit" asp-route-id="@room.Id" class="btn btn-info btn-sm text-white"><i class="fa fa-edit me-2"></i>Düzenle</a>
+									<a asp-action="DeleteRoom" asp-route-id="@room.Id"class="btn btn-info btn-sm text-white" onclick="return confirm('@room.RoomNumber numaralı odayı silmek istediğinizden emin misiniz?')"><i class="fa fa-edit me-2"></i>Sil</a>
+								</td>
+							</tr>
+				}
+		</tbody>
+	</table>
+</div>
+</div>

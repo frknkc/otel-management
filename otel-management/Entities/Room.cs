@@ -1,13 +1,20 @@
-﻿namespace otel_management.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace otel_management.Entities
 {
     public class Room
     {
-        public  Guid Id { get; set; }
-        public string RoomNumber { get; set; }
-        public string RoomPhoto { get; set; }
-        public string RoomDetail { get; set; }
-        public int BedCount { get; set; }
-        public bool IsAvailable { get; set; } = false;
+        public  int Id { get; set; }
+        [Required]
+        public string? RoomNumber { get; set; }
+        public string? RoomPhoto { get; set; }
+        public string? RoomDetail { get; set; }
+		public string? RoomPrice { get; set; }
+
+		public int BedCount { get; set; } = 0;
+        public bool IsAvailable { get; set; } = true;
+
+
 
         public virtual ICollection<Reservation> Reservations { get; set; }
     }

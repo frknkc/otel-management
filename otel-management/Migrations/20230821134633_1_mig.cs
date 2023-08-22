@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace otel_management.Migrations
 {
     /// <inheritdoc />
-    public partial class Mig_1 : Migration
+    public partial class _1_mig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,10 +15,11 @@ namespace otel_management.Migrations
                 name: "Rooms",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoomNumber = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    RoomPhoto = table.Column<string>(type: "nvarchar(250)", nullable: false),
-                    RoomDetail = table.Column<string>(type: "nvarchar(500)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoomNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RoomPhoto = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RoomDetail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BedCount = table.Column<int>(type: "int", nullable: false),
                     IsAvailable = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -31,10 +32,11 @@ namespace otel_management.Migrations
                 name: "Services",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ServiceName = table.Column<string>(type: "nvarchar(100)", nullable: false),
-                    ServicePhoto = table.Column<string>(type: "nvarchar(250)", nullable: false),
-                    ServiceDetail = table.Column<string>(type: "nvarchar(500)", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ServiceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ServicePhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ServiceDetail = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,12 +47,13 @@ namespace otel_management.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(100)", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(50)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(100)", nullable: true),
-                    IsAdmin = table.Column<bool>(type: "bit", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -62,22 +65,21 @@ namespace otel_management.Migrations
                 name: "Reservations",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     RoomId = table.Column<int>(type: "int", nullable: false),
-                    CheckInDate = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    CheckOutDate = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    TotalPrice = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    UserId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoomId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    CheckInDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CheckOutDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TotalPrice = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ServiceId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reservations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reservations_Rooms_RoomId1",
-                        column: x => x.RoomId1,
+                        name: "FK_Reservations_Rooms_RoomId",
+                        column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -88,17 +90,17 @@ namespace otel_management.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Reservations_Users_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Reservations_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservations_RoomId1",
+                name: "IX_Reservations_RoomId",
                 table: "Reservations",
-                column: "RoomId1");
+                column: "RoomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_ServiceId",
@@ -106,9 +108,9 @@ namespace otel_management.Migrations
                 column: "ServiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservations_UserId1",
+                name: "IX_Reservations_UserId",
                 table: "Reservations",
-                column: "UserId1");
+                column: "UserId");
         }
 
         /// <inheritdoc />

@@ -3,7 +3,7 @@ namespace otel_management.Entities
 {
     public class Reservation
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public int UserId { get; set; }
         public int RoomId { get; set; }
         public string CheckInDate { get; set; }

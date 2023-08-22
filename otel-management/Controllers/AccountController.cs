@@ -113,7 +113,7 @@ namespace otel_management.Controllers
         }
         void ProfileLoader()
         {
-            Guid userid = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            int userid =  int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             User user = _databaseCntx.Users.SingleOrDefault(x => x.Id == userid);
             ViewData["FullName"] = user.FullName;
             ViewData["Email"] = user.Email;
@@ -124,11 +124,11 @@ namespace otel_management.Controllers
         {
             if (ModelState.IsValid)
             {
-                Guid userid = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                int userid =  int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
                 User user = _databaseCntx.Users.SingleOrDefault(x => x.Id == userid);
 
                 user.FullName = fullname;
-                _databaseCntx.SaveChanges(); 
+                _databaseCntx.SaveChanges();
                 ViewData["result"] = "FullNameChanged";
             }
             ProfileLoader();
@@ -140,7 +140,7 @@ namespace otel_management.Controllers
         {
             if (ModelState.IsValid)
             {
-                Guid userid = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                int userid = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
                 User user = _databaseCntx.Users.SingleOrDefault(x => x.Id == userid);
 
                 user.Password = password;
@@ -157,7 +157,7 @@ namespace otel_management.Controllers
         {
             if (ModelState.IsValid)
             {
-                Guid userid = new Guid(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                int userid = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
                 User user = _databaseCntx.Users.SingleOrDefault(x => x.Id == userid);
 
                 user.Email = mail;

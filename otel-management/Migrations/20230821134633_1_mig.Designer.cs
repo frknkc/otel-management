@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using otel_management.Data;
 
@@ -11,9 +12,11 @@ using otel_management.Data;
 namespace otel_management.Migrations
 {
     [DbContext(typeof(DatabaseCntx))]
-    partial class DatabaseCntxModelSnapshot : ModelSnapshot
+    [Migration("20230821134633_1_mig")]
+    partial class _1_mig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,9 +89,6 @@ namespace otel_management.Migrations
                     b.Property<string>("RoomPhoto")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoomPrice")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Rooms");
@@ -102,9 +102,6 @@ namespace otel_management.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("IsAvaliable")
-                        .HasColumnType("bit");
-
                     b.Property<string>("ServiceDetail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -114,10 +111,6 @@ namespace otel_management.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ServicePhoto")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ServicePrice")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

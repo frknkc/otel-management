@@ -12,8 +12,8 @@ using otel_management.Data;
 namespace otel_management.Migrations
 {
     [DbContext(typeof(DatabaseCntx))]
-    [Migration("20230816064041_Mig_1")]
-    partial class Mig_1
+    [Migration("20230821193710_3_mig")]
+    partial class _3_mig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,9 +27,11 @@ namespace otel_management.Migrations
 
             modelBuilder.Entity("otel_management.Entities.Reservation", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CheckInDate")
                         .IsRequired()
@@ -42,11 +44,8 @@ namespace otel_management.Migrations
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("RoomId1")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ServiceId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
 
                     b.Property<string>("TotalPrice")
                         .IsRequired()
@@ -55,25 +54,24 @@ namespace otel_management.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("RoomId1");
+                    b.HasIndex("RoomId");
 
                     b.HasIndex("ServiceId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("otel_management.Entities.Room", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BedCount")
                         .HasColumnType("int");
@@ -82,7 +80,6 @@ namespace otel_management.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("RoomDetail")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RoomNumber")
@@ -90,7 +87,9 @@ namespace otel_management.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RoomPhoto")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoomPrice")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -100,9 +99,14 @@ namespace otel_management.Migrations
 
             modelBuilder.Entity("otel_management.Entities.Service", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsAvaliable")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ServiceDetail")
                         .IsRequired()
@@ -116,6 +120,10 @@ namespace otel_management.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ServicePrice")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Services");
@@ -123,9 +131,11 @@ namespace otel_management.Migrations
 
             modelBuilder.Entity("otel_management.Entities.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -136,10 +146,11 @@ namespace otel_management.Migrations
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -156,7 +167,7 @@ namespace otel_management.Migrations
                 {
                     b.HasOne("otel_management.Entities.Room", "Room")
                         .WithMany("Reservations")
-                        .HasForeignKey("RoomId1")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -168,7 +179,7 @@ namespace otel_management.Migrations
 
                     b.HasOne("otel_management.Entities.User", "User")
                         .WithMany("Reservations")
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

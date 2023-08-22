@@ -1,0 +1,152 @@
+﻿@model RoomViewModel
+@{
+    ViewData["Title"] = "Oda Bilgileri Düzenle";
+}
+
+<div class="row">
+    <div class="col-4 offset-4">
+        <h1 class="display-4 border-bottom text-center"><i class="fa-solid fa-user-plus"></i> @ViewData["Title"]</h1>
+    </div>
+</div>
+ <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+<br /><br />
+<div class="row">
+    <div class="col">
+        <form method="post" style="height: 650px; width: 400px; ">
+            <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+
+            <div class="form-group mb-3" style="margin-top:-70px">
+                <label asp-for="RoomNumber" class="form-label">Oda numarası</label>
+                <input asp-for="RoomNumber" class="form-control" placeholder="Oda numarası giriniz.." />
+                <span asp-validation-for="RoomNumber" class="text-danger small"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="RoomDetail" class="form-label">Oda Detayları</label>
+                <input asp-for="RoomDetail" class="form-control" placeholder="Oda detaylarını giriniz.." />
+                <span asp-validation-for="RoomDetail" class="text-danger small"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="RoomPhoto" class="form-label">Oda Fotoğrafı</label>
+                <input asp-for="RoomPhoto" class="form-control" placeholder="Oda fotoğraflarını giriniz.." />
+                <span asp-validation-for="RoomPhoto" class="text-danger small"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="RoomPrice" class="form-label">Oda Fiyatı</label>
+                <input asp-for="RoomPrice" class="form-control" placeholder="Oda fiyatını giriniz.." />
+                <span asp-validation-for="RoomPrice" class="text-danger small"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="IsAvailable" class="form-label">Rezerv Durumu</label>
+                <select asp-for="IsAvailable" class="form-control">
+                    <option value="">Lütfen Seçiniz..</option>
+                    <option value="true" class="text-dark">rezerv edilmemiş</option>
+                    <option value="false" class="text-dark">rezerv edilmiş</option>
+                </select>
+                <span asp-validation-for="IsAvailable" class="text-danger small"></span>
+            </div>
+            <div class="form-group d-grid mb-3">
+                <button type="submit" class="btn btn-primary d-block"><i class="fa-solid fa-user-plus"></i>Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    form {
+    height: 100px;
+    width: 300px;
+    background-color: rgba(255,255,255,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+}
+
+    form * {
+        font-family: 'Poppins',sans-serif;
+        color: #ffffff;
+        letter-spacing: 0.5px;
+        outline: none;
+        border: none;
+    }
+
+    form h3 {
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 42px;
+        text-align: center;
+    }
+
+label {
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+input {
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+::placeholder {
+    color: #e5e5e5;
+}
+
+button {
+    margin-top: 50px;
+    width: 100%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.background {
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+
+    .background .shape {
+        height: 200px;
+        width: 200px;
+        position: absolute;
+        border-radius: 50%;
+    }
+
+.shape:first-child {
+    background: linear-gradient( #1845ad, #23a2f6 );
+    left: -80px;
+    top: -80px;
+}
+
+.shape:last-child {
+    background: linear-gradient( to right, #ff512f, #f09819 );
+    right: -30px;
+    bottom: -80px;
+}
+</style>

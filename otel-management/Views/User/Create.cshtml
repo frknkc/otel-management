@@ -1,0 +1,168 @@
+﻿@model CreateUserModel
+@{
+    ViewData["Title"] = "Kayıt Ekle";
+}
+
+<div class="row">
+    <div class="col-4 offset-4">
+        <h1 class="display-4 border-bottom text-center"><i class="fa-solid fa-user-plus"></i> @ViewData["Title"]</h1>
+    </div>
+</div>
+ <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+<br /><br />
+<div class="row">
+    <div class="col">
+        <form method="post" style="height: 650px; width: 400px; ">
+            <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+
+            <div class="form-group mb-3" style="margin-top:-70px">
+                <label asp-for="FullName" class="form-label">Ad Soyad</label>
+                <input asp-for="FullName" class="form-control" placeholder="tam adınızı giriniz.." />
+                <span asp-validation-for="FullName" class="text-danger small"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Email" class="form-label">E-posta</label>
+                <input asp-for="Email" class="form-control" placeholder="e-posta adresinizi giriniz.." />
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Username" class="form-label">Kullanıcı Adı</label>
+                <input asp-for="Username" class="form-control" placeholder="kullanıcı adınızı giriniz.." />
+                <span asp-validation-for="Username" class="text-danger small"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Password" class="form-label">Şifre</label>
+                <input asp-for="Password" type="password" class="form-control" placeholder="şifrenizi giriniz..." />
+                <span asp-validation-for="Password" class="text-danger small"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="KullanıcıSifreTekrar" class="form-label">Şifre Tekrar</label>
+                <input asp-for="KullanıcıSifreTekrar" type="password" class="form-control" placeholder="şifrenizi tekrar giriniz..." />
+                <span asp-validation-for="KullanıcıSifreTekrar" class="text-danger small"></span>
+            </div>
+
+             <div class="form-group mb-3">
+                <label asp-for="Role" class="form-label">Rolü</label>
+                <select asp-for="Role" class="form-control">
+					<option value="">Lütfen Seçiniz..</option>
+                    <option value="admin" class="text-dark">admin</option>
+                    <option value="user" class="text-dark">kullanıcı</option>
+                </select>
+                <span asp-validation-for="Role" class="text-danger small"></span>
+            </div>
+            <div class="form-group d-grid mb-3">
+                <button type="submit" class="btn btn-primary d-block"><i class="fa-solid fa-user-plus"></i>Kullanıcı ekle</button>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    @if (ViewData["result"] != null && ViewData["result"] == "RegisterX")
+    {
+                            <script>
+                                toastr["warning"]("Kayıt İşlemi Başarısız.", "Farklı bir kullanıcı adı deneyiniz!")
+                                </script>
+    }
+}
+
+<style>
+    form {
+    height: 100px;
+    width: 300px;
+    background-color: rgba(255,255,255,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+}
+
+    form * {
+        font-family: 'Poppins',sans-serif;
+        color: #ffffff;
+        letter-spacing: 0.5px;
+        outline: none;
+        border: none;
+    }
+
+    form h3 {
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 42px;
+        text-align: center;
+    }
+
+label {
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+input {
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+::placeholder {
+    color: #e5e5e5;
+}
+
+button {
+    margin-top: 50px;
+    width: 100%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.background {
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+
+    .background .shape {
+        height: 200px;
+        width: 200px;
+        position: absolute;
+        border-radius: 50%;
+    }
+
+.shape:first-child {
+    background: linear-gradient( #1845ad, #23a2f6 );
+    left: -80px;
+    top: -80px;
+}
+
+.shape:last-child {
+    background: linear-gradient( to right, #ff512f, #f09819 );
+    right: -30px;
+    bottom: -80px;
+}
+</style>

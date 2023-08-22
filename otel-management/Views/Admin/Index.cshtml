@@ -1,20 +1,45 @@
 ﻿@using otel_management.Entities;
-@model List<User>
+@model List<UserViewModel>
+@{
+	ViewData["Title"] = "UserEdit";
+}
 
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>User List</title>
-</head>
-<body>
-    <h1>User List</h1>
-   
-    <ul>
-        @*@foreach (var user in Model)
-        {
-            <li>@user.Username | @user.Password |  @user.FullName |  @user.Email </li>
-        }*@
-    </ul>
-</body>
-</html>
+	<div class="row">
+<div class="col">
+	<h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+</div>
+
+<div class="row">
+<div class="col">
+	<table class="table table-hover table-sm">	
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Ad-Soyad</th>
+				<th>Kullanıcı Adı</th>
+				<th>Rolü</th>
+				<th>Kayıt Tarihi</th>
+				<th>Mail</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (UserViewModel user in Model)
+				{
+					<tr>
+							<td>@user.FullName</td>
+							<td>@user.Username</td>
+							<td>@user.Email</td>
+							<td>@user.Role</td>
+							<td>@user.CreatedAt</td>
+							<td>
+								<button class="btn btn-info btn-sm"><i class="fa fa-edit me-2"></i>Düzenle</button>
+								<button class="btn btn-info btn-sm"><i class="fa fa-edit me-2"></i>Sil</button>
+							</td>
+					</tr>
+				}
+		</tbody>
+	</table>
+</div>
+</div>

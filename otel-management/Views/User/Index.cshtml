@@ -1,0 +1,52 @@
+﻿@using otel_management.Entities;
+@model List<UserViewModel>
+@{
+	ViewData["Title"] = "Kullanıcı Bilgi Değişikliği";
+}
+
+
+	<div class="row">
+<div class="col">
+	<h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+</div><br />
+
+
+<div class="row">
+	<div class="col">
+		<a asp-action="Create" class="btn btn-primary btn-sm"><i class="fa fa-plus me-2"></i>Yeni Kullanıcı Ekle</a>
+	</div>
+</div>
+
+
+<div class="row">
+<div class="col">
+	<table class="table table-hover-blue table-sm text-white">	
+		<thead>
+			<tr>
+				<th>Ad-Soyad</th>
+				<th>Kullanıcı Adı</th>
+				<th>Mail</th>
+				<th>Rolü</th>
+				<th>Kayıt Tarihi</th>
+			</tr>
+		</thead>
+		<tbody>
+				@foreach (UserViewModel user in Model)
+				{
+					<tr>
+						<td>@user.FullName</td>
+						<td>@user.Username</td>
+						<td>@user.Email</td>
+						<td>@user.Role</td>
+						<td>@user.CreatedAt</td>
+						<td class="text-and">
+							<a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-info btn-sm text-white"><i class="fa fa-edit me-2"></i>Düzenle</a>
+							<a asp-action="Delete" asp-route-id="@user.Id"class="btn btn-info btn-sm text-white" onclick="return confirm('@user.Username adlı kişi silmek istediğinizden emin misiniz?')"><i class="fa fa-edit me-2"></i>Sil</a>
+						</td>
+					</tr>
+				}
+		</tbody>
+	</table>
+</div>
+</div>
