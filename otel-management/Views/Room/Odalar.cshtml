@@ -1,0 +1,46 @@
+﻿@model List<RoomViewModel>
+
+<div class="container mt-5">
+    <h1 class="text-center">Otel Randevusu</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form id="booking-form">
+          <div class="form-group">
+            <label for="check-in-date">Giriş Tarihi:</label>
+            <input type="date" class="form-control" id="check-in-date" required>
+          </div>
+          <div class="form-group">
+            <label for="check-out-date">Çıkış Tarihi:</label>
+            <input type="date" class="form-control" id="check-out-date" required>
+          </div>
+          <div class="form-group">
+            <label for="guest-count">Kişi Sayısı:</label>
+            <input type="number" class="form-control" id="guest-count" min="1" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Odalara Gözat</button>
+        </form>
+      </div>
+    </div>
+    <div class="mt-4" id="room-list">
+        <div class="row">
+        @foreach (RoomViewModel room in Model)
+        {
+                    <div class="col-md-4 mb-4">
+                    <div class="card text-dark text-center">
+                    <img src="~/images/@room.RoomPhoto" class="card-img-top" alt="@room.RoomPhoto">
+                    <div class="card-body">
+                      <h5 class="card-title">Oda Numarası -> @room.RoomNumber</h5>
+                      <p class="card-text">@room.RoomDetail</p>
+                      <p class="card-text">Kapasite -> @room.BedCount </p>
+                      <p class="card-text">Oda Ücreti -> @room.RoomPrice </p>
+                      <a href="#" class="btn btn-primary">Sepete Ekle</a>
+                    </div>
+                    </div>
+                    </div>
+        }
+        </div>
+    </div>
+  </div>
+
+
+

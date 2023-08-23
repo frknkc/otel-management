@@ -23,25 +23,33 @@
 <div class="col">
 	<table class="table table-hover-blue table-sm text-white">	
 		<thead>
-			<tr>
+			<tr class="text-center">
 				<th>Hizmet ID</th>
 				<th>Hizmet Adı</th>
 				<th>Hizmet Fotoğrafı</th>
 				<th>Hizmet Detayları</th>
 				<th>Hizmet Fiyatı</th>
 				<th>Rezerv Durumu</th>
+				<th>Operasyonlar</th>
 			</tr>
 		</thead>
 		<tbody>
 				@foreach (ServiceViewModel service in Model)
 				{
-						<tr>
+						<tr class="text-center">
 							<td>@service.Id</td>
 							<td>@service.ServiceName</td>
 							<td>@service.ServicePhoto</td>
 							<td>@service.ServiceDetail</td>
 							<td>@service.ServicePrice</td>
-							<td>@service.IsAvaliable</td>
+								<td class="text-center">@if (@service.IsAvaliable == true)
+									{
+										<i class="fa-solid fa-xmark fa-beat" style="color: #ff0000;"></i>
+									}
+									@if (@service.IsAvaliable == false)
+									{
+										<i class="fa-solid fa-check fa-beat" style="color: #00ff1e;"></i>
+									}</td>
 							<td class="text-and">
 									<a asp-action="RezervService" asp-route-id="@service.Id" class="btn btn-info btn-sm text-white" onclick="return confirm('@service.ServiceName adlı hizmetin rezerv değişikliğini yapmak istediğinize emin misiniz?')"><i class="fa-regular fa-cross fa-bounce fa-xs"></i> Rezerv Değiştir</a>
 								<a asp-action="EditService" asp-route-id="@service.Id" class="btn btn-info btn-sm text-white"><i class="fa fa-edit me-2"></i>Düzenle</a>

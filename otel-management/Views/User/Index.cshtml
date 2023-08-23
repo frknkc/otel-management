@@ -23,18 +23,19 @@
 <div class="col">
 	<table class="table table-hover-blue table-sm text-white">	
 		<thead>
-			<tr>
+			<tr class="text-center">
 				<th>Ad-Soyad</th>
 				<th>Kullanıcı Adı</th>
 				<th>Mail</th>
 				<th>Rolü</th>
 				<th>Kayıt Tarihi</th>
+				<th>Operasyonlar</th>
 			</tr>
 		</thead>
 		<tbody>
 				@foreach (UserViewModel user in Model)
 				{
-					<tr>
+						<tr class="text-center" >
 						<td>@user.FullName</td>
 						<td>@user.Username</td>
 						<td>@user.Email</td>

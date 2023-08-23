@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using otel_management.Data;
 using otel_management.Entities;
@@ -6,6 +7,7 @@ using otel_management.Models;
 
 namespace otel_management.Controllers
 {
+	[Authorize]
 	public class RoomController : Controller
 	{
 		private DatabaseCntx _databaseContext;
@@ -33,8 +35,23 @@ namespace otel_management.Controllers
 
 			return View(model);
 		}
+        public IActionResult Odalar()
+        {
+            List<RoomViewModel> model = _databaseContext.Rooms
+        .Select(x => new RoomViewModel
+        {
+            Id = x.Id,
+            RoomDetail = x.RoomDetail,
+            RoomNumber = x.RoomNumber,
+            RoomPhoto = x.RoomPhoto,
+            BedCount = x.BedCount,
+            RoomPrice = x.RoomPrice,
+            IsAvailable = x.IsAvailable,
+        }).ToList();
 
-		public IActionResult CreateRoom()
+            return View(model);
+        }
+        public IActionResult CreateRoom()
 		{
 			return View();
 		}

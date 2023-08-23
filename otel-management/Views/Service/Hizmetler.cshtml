@@ -1,0 +1,24 @@
+﻿@using otel_management.Entities;
+@model List<ServiceViewModel>
+
+
+
+<div class="container mt-5">
+    <h2>Hizmetlerimiz</h2>
+    <div class="row">
+        @foreach (ServiceViewModel hizmet in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card text-dark">
+                            <img src="~/serviceimg/@hizmet.ServicePhoto" class="card-img-top" alt="@hizmet.ServiceName">
+                        <div class="card-body">
+                            <h5 class="card-title">@hizmet.ServiceName</h5>
+                            <p class="card-text">@hizmet.ServiceDetail</p>
+                            <p class="card-text">Hizmet Ücreti -> @hizmet.ServicePrice </p>
+                            <a href="#" class="btn btn-primary">Sepete Ekle</a>
+                        </div>
+                    </div>
+                </div>
+            }
+    </div>
+</div>

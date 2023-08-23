@@ -23,25 +23,35 @@
 <div class="col">
 	<table class="table table-hover-blue table-sm text-white">	
 		<thead>
-			<tr>
+			<tr class="text-center">
 				<th>Oda Numarası</th>
 				<th>Oda Kişi Sayısı</th>
 				<th>Oda Fotoğrafı</th>
 				<th>Oda Detayları</th>
 				<th>Oda Fiyatı</th>
 				<th>Rezerv Durumu</th>
+				<th>Operasyonlar</th>
+
 			</tr>
 		</thead>
 		<tbody>
 				@foreach (RoomViewModel room in Model)
 				{
-							<tr>
+								<tr class="text-center">
 								<td>@room.RoomNumber</td>
 								<td>@room.BedCount</td>
 								<td>@room.RoomPhoto</td>
 								<td>@room.RoomDetail</td>
 								<td>@room.RoomPrice</td>
-								<td>@room.IsAvailable</td>
+										<td>@if (@room.IsAvailable == true)
+											{
+												<i class="fa-solid fa-xmark fa-beat" style="color: #ff0000;"></i>
+											}
+											@if (@room.IsAvailable == false)
+											{
+													<i class="fa-solid fa-check fa-beat" style="color: #00ff1e;"></i>
+											}
+									</td>
 								<td class="text-and">
 									<a asp-action="RezervRoom" asp-route-id="@room.Id" class="btn btn-info btn-sm text-white"onclick="return confirm('@room.RoomNumber numaralı odanın rezerv değişikliğini yapmak istediğinize emin misiniz?')"><i class="fa-regular fa-cross fa-bounce fa-xs"></i> Rezerv Değiştir</a>
 									<a asp-action="EditRoom" asp-route-id="@room.Id" class="btn btn-info btn-sm text-white"><i class="fa fa-edit me-2"></i>Düzenle</a>

@@ -18,7 +18,7 @@ namespace otel_management.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Odalar", "Room");
         }
 
         public IActionResult Privacy()

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using otel_management.Data;
 using otel_management.Entities;
@@ -6,7 +7,8 @@ using otel_management.Models;
 
 namespace otel_management.Controllers
 {
-    public class ServiceController : Controller
+	[Authorize]
+	public class ServiceController : Controller
     {
         private DatabaseCntx _databaseContext;
         private readonly IMapper _mapper;
@@ -16,6 +18,21 @@ namespace otel_management.Controllers
             _databaseContext = databaseContext;
             _mapper = imapper;
 
+        }
+        public IActionResult Hizmetler()
+        {
+            List<ServiceViewModel> model = _databaseContext.Services
+        .Select(x => new ServiceViewModel
+        {
+            ServiceName = x.ServiceName,
+            ServiceDetail = x.ServiceDetail,
+            ServicePhoto = x.ServicePhoto,
+            ServicePrice = x.ServicePrice,
+            IsAvaliable = x.IsAvaliable,
+            Id = x.Id,
+        }).ToList();
+
+            return View(model);
         }
         public IActionResult Index()
         {
