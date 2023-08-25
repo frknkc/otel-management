@@ -4,9 +4,11 @@ using otel_management.Data;
 using otel_management.Models;
 using otel_management.Entities;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace otel_management.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private DatabaseCntx _databaseContext;
@@ -60,6 +62,7 @@ namespace otel_management.Controllers
         public IActionResult Edit(int id)
         {
             User user = _databaseContext.Users.Find(id);
+            
             EditUserModel model = _mapper.Map<EditUserModel>(user);
 
             return View(model);

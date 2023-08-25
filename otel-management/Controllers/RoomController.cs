@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using otel_management.Data;
 using otel_management.Entities;
 using otel_management.Models;
+using System.Security.Claims;
 
 namespace otel_management.Controllers
 {
@@ -12,8 +13,8 @@ namespace otel_management.Controllers
 	{
 		private DatabaseCntx _databaseContext;
 		private readonly IMapper _mapper;
-
-		public RoomController(DatabaseCntx databaseContext, IMapper imapper)
+        
+        public RoomController(DatabaseCntx databaseContext, IMapper imapper)
 		{
 			_databaseContext = databaseContext;
 			_mapper = imapper;
@@ -31,10 +32,14 @@ namespace otel_management.Controllers
 			BedCount = x.BedCount,
 			RoomPrice = x.RoomPrice,
 			IsAvailable = x.IsAvailable,
+			CheckOutDate = x.CheckOutDate,
+			CheckInDate = x.CheckInDate,
 		}).ToList();
-
+				
 			return View(model);
 		}
+
+	
         public IActionResult Odalar()
         {
             List<RoomViewModel> model = _databaseContext.Rooms
@@ -47,9 +52,43 @@ namespace otel_management.Controllers
             BedCount = x.BedCount,
             RoomPrice = x.RoomPrice,
             IsAvailable = x.IsAvailable,
+			CheckOutDate = x.CheckOutDate,
+			CheckInDate = x.CheckInDate,
         }).ToList();
 
             return View(model);
+        }
+		[HttpPost]
+        public IActionResult Odalar(int id)
+        {
+			int odaId = id;	
+
+            return View("Rezerv");
+        }
+
+        public IActionResult Reservation()
+        {
+            int userid = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            User user = _databaseContext.Users.SingleOrDefault(x => x.Id == userid);
+
+            var rezervas = (from rezerv in _databaseContext.Reservations
+                           join uye in _databaseContext.Users on rezerv.UserId equals uye.Id
+                           join oda in _databaseContext.Rooms on rezerv.RoomId equals oda.Id
+                           join servis in _databaseContext.Services on rezerv.ServiceId equals servis.Id
+                           where rezerv.UserId == userid
+                           select new RezervModel
+                           {
+                               Id = rezerv.Id,
+                               RoomNumber = oda.RoomNumber,
+                               BedCount = oda.BedCount,
+                               RoomPrice = oda.RoomPrice,
+                               ServiceName = servis.ServiceName,
+                               ServicePrice = servis.ServicePrice,
+                               CheckInDate = rezerv.CheckInDate,
+                               CheckOutDate = rezerv.CheckOutDate,
+                               TotalPrice = rezerv.TotalPrice
+                           }).ToList();
+            return View(rezervas);
         }
         public IActionResult CreateRoom()
 		{
@@ -72,6 +111,8 @@ namespace otel_management.Controllers
 				room.RoomPhoto = model.RoomPhoto;
 				room.RoomPrice = model.RoomPrice;
 				room.BedCount = model.BedCount;
+				room.CheckInDate = room.CheckInDate;
+				room.CheckOutDate = room.CheckOutDate;
 				_databaseContext.Rooms.Add(room);
 				_databaseContext.SaveChanges();
 				return RedirectToAction(nameof(Index));
@@ -134,5 +175,37 @@ namespace otel_management.Controllers
 			}
 			return RedirectToAction(nameof(Index));
 		}
-	}
+
+		public IActionResult Rezerv()
+		{
+
+
+            return View();
+        }
+
+		[HttpPost]
+        public IActionResult Rezerv(int id ,CreateRezervModel model)
+        {
+            int odaId = id;
+
+            int userid = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            User user = _databaseContext.Users.SingleOrDefault(x => x.Id == userid);
+            Room rooms = _databaseContext.Rooms.Find(id);
+            rooms.IsAvailable = true;
+            var rezarvasyon = new Reservation
+			{
+				UserId = userid,
+				RoomId = odaId,
+				CheckInDate = model.CheckInDate,
+				CheckOutDate = model.CheckOutDate,
+				TotalPrice = model.TotalPrice,
+				ServiceId = 2
+            };
+            _databaseContext.Reservations.Add(rezarvasyon);
+			_databaseContext.SaveChanges();
+
+
+            return RedirectToAction(nameof(Reservation));
+        }
+    }
 }

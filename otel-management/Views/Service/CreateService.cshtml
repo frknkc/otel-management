@@ -20,7 +20,7 @@
 
             <div class="form-group mb-3" style="margin-top:-70px">
                 <label asp-for="ServiceName" class="form-label">Hizmet Adı</label>
-                <input asp-for="ServiceName" class="form-control" placeholder="Hizmer adı giriniz.." />
+                <input asp-for="ServiceName" class="form-control" placeholder="Hizmet adı giriniz.." />
                 <span asp-validation-for="ServiceName" class="text-danger small"></span>
             </div>
 
@@ -30,9 +30,9 @@
                 <span asp-validation-for="ServiceDetail" class="text-danger small"></span>
             </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="ServicePhoto" class="form-label">Hizmet Fotoğrafı</label>
-                <input asp-for="ServicePhoto" class="form-control" placeholder="Hizmet fotoğraflarını giriniz.." />
+             <div class="form-group mb-3">
+                <label asp-for="ServicePhoto" class="form-label">Oda Fotoğrafı</label>
+                <input asp-for="ServicePhoto" type="file" class="form-control" />
                 <span asp-validation-for="ServicePhoto" class="text-danger small"></span>
             </div>
             <div class="form-group mb-3">
@@ -44,8 +44,8 @@
                 <label asp-for="IsAvaliable" class="form-label">Rezerv Durumu</label>
                 <select asp-for="IsAvaliable" class="form-control">
                     <option value="">Lütfen Seçiniz..</option>
-                    <option value="true" class="text-dark">rezerv edilmemiş</option>
-                    <option value="false" class="text-dark">rezerv edilmiş</option>
+                    <option value="false" class="text-dark">rezerv edilmemiş</option>
+                    <option value="true" class="text-dark">rezerv edilmiş</option>
                 </select>
                 <span asp-validation-for="IsAvaliable" class="text-danger small"></span>
             </div>

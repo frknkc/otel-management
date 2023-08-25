@@ -15,7 +15,7 @@ namespace otel_management.Models
         [Required(ErrorMessage = "Şifre girmek zorunludur.")]
         [MaxLength(16, ErrorMessage = "Şifre maximum 16 karakter olabilir")]
         [MinLength(6, ErrorMessage = "Şifre minimum 6 karakter olabilir")]
-        [Compare(nameof(KullanıcıSifre))]
+        [Compare(nameof(KullanıcıSifre))] 
         public string? KullanıcıSifreTekrar { get; set; }
     }
 }

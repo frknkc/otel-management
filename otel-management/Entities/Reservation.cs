@@ -9,7 +9,7 @@ namespace otel_management.Entities
         public string CheckInDate { get; set; }
         public string CheckOutDate { get; set; }
         public string TotalPrice { get; set; }
-
+        public int ServiceId { get; set; }
         public virtual User User { get; set; }
         public virtual Room Room { get; set; }
         public virtual Service Service { get; set; }

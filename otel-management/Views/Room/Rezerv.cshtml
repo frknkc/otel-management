@@ -1,6 +1,6 @@
-﻿@model RoomViewModel
+﻿@model CreateRezervModel
 @{
-    ViewData["Title"] = "Oda Ekle";
+    ViewData["Title"] = "Rezarvasyon Ekleme";
 }
 
 <div class="row">
@@ -19,44 +19,24 @@
             <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
 
             <div class="form-group mb-3" style="margin-top:-70px">
-                <label asp-for="RoomNumber" class="form-label">Oda Numarası</label>
-                <input asp-for="RoomNumber" class="form-control" placeholder="Oda numaranızı giriniz.." />
-                <span asp-validation-for="RoomNumber" class="text-danger small"></span>
+                <label asp-for="CheckInDate" class="form-label">Başlangıç Tarihi</label>
+                <input asp-for="CheckInDate" type="date" class="form-control" placeholder="Oda numaranızı giriniz.." />
+                <span asp-validation-for="CheckInDate" class="text-danger small"></span>
             </div>
 
             <div class="form-group mb-3">
-                <label asp-for="RoomPhoto" class="form-label">Oda Fotoğrafı</label>
-                <input asp-for="RoomPhoto" type="file" class="form-control" />
-                <span asp-validation-for="RoomPhoto" class="text-danger small"></span>
-            </div>
-           
-            <div class="form-group mb-3">
-                <label asp-for="RoomDetail" class="form-label">Oda Detayları</label>
-                <input asp-for="RoomDetail" class="form-control" placeholder="Oda detaylarını giriniz.." />
-                <span asp-validation-for="RoomDetail" class="text-danger small"></span>
+                <label asp-for="CheckOutDate" class="form-label">Bitiş Tarihi</label>
+                <input asp-for="CheckOutDate" type="date" class="form-control" />
+                <span asp-validation-for="CheckOutDate" class="text-danger small"></span>
             </div>
 
             <div class="form-group mb-3">
-                <label asp-for="BedCount" class="form-label">yatak sayısı</label>
-                <input asp-for="BedCount" type="count" class="form-control" placeholder="Yatak sayısını giriniz..." />
-                <span asp-validation-for="BedCount" class="text-danger small"></span>
-            </div>
-            <div class="form-group mb-3">
-                <label asp-for="RoomPrice" class="form-label">Oda Fiyatı</label>
-                <input asp-for="RoomPrice" class="form-control" placeholder="Oda fiyatını giriniz.." />
-                <span asp-validation-for="RoomPrice" class="text-danger small"></span>
-            </div>
-             <div class="form-group mb-3">
-                <label asp-for="IsAvailable" class="form-label">Rezerv Durumu</label>
-                <select asp-for="IsAvailable" class="form-control">
-                    <option value="">Lütfen Seçiniz..</option>
-                    <option value="false" class="text-dark">rezerve edilebilir</option>
-                    <option value="true" class="text-dark">rezerve edilemez</option>
-                </select>
-                <span asp-validation-for="IsAvailable" class="text-danger small"></span>
+                <label asp-for="TotalPrice" class="form-label">Toplam Ücret</label>
+                <input asp-for="TotalPrice" class="form-control" placeholder="Oda detaylarını giriniz.." />
+                <span asp-validation-for="TotalPrice" class="text-danger small"></span>
             </div>
             <div class="form-group d-grid mb-3">
-                <button type="submit" class="btn btn-primary d-block"><i class="fa-solid fa-user-plus"></i>Oda ekle</button>
+                <button type="submit" class="btn btn-primary d-block"><i class="fa-solid fa-user-plus"></i>Rezarvasyonu Oluştur.</button>
             </div>
         </form>
     </div>

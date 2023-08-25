@@ -31,7 +31,6 @@
 				<th>Oda Fiyatı</th>
 				<th>Rezerv Durumu</th>
 				<th>Operasyonlar</th>
-
 			</tr>
 		</thead>
 		<tbody>
@@ -40,7 +39,7 @@
 								<tr class="text-center">
 								<td>@room.RoomNumber</td>
 								<td>@room.BedCount</td>
-								<td>@room.RoomPhoto</td>
+								<td><img src="~/images/@room.RoomPhoto" width="50" height="50"> </td>
 								<td>@room.RoomDetail</td>
 								<td>@room.RoomPrice</td>
 										<td>@if (@room.IsAvailable == true)

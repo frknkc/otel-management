@@ -3,22 +3,36 @@
 
 
 
-<div class="container mt-5">
-    <h2>Hizmetlerimiz</h2>
+<div class="container mt-5 text-center">
+    <h1>Hizmetlerimiz</h1>
+    <h2 >Aşağıda kartlarda rezervasyon yaparken ekleyebileceğimiz hizmetlerimiz listelenmektedir.</h2> <h2>Lütfen rezervasyon yaparken istediğiniz hizmeti seçiniz.  </h2>
     <div class="row">
         @foreach (ServiceViewModel hizmet in Model)
             {
-                <div class="col-md-4 mb-4">
-                    <div class="card text-dark">
-                            <img src="~/serviceimg/@hizmet.ServicePhoto" class="card-img-top" alt="@hizmet.ServiceName">
-                        <div class="card-body">
-                            <h5 class="card-title">@hizmet.ServiceName</h5>
-                            <p class="card-text">@hizmet.ServiceDetail</p>
-                            <p class="card-text">Hizmet Ücreti -> @hizmet.ServicePrice </p>
-                            <a href="#" class="btn btn-primary">Sepete Ekle</a>
+                @if (hizmet.IsAvaliable==false)
+            {
+                         <div class="col-md-4 mb-4">
+                            <div class="card text-dark text-center uppercase-text">
+                                            <img src="~/serviceimg/@hizmet.ServicePhoto" class="card-img-top" alt="@hizmet.ServiceName">
+                                <div class="card-body">
+                                    <h5 class="card-title">@hizmet.ServiceName</h5>
+                                    <p class="card-text">@hizmet.ServiceDetail</p>
+                                    <p class="card-text">Hizmet Ücreti -> @hizmet.ServicePrice </p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+            }
             }
     </div>
 </div>
+<style>
+    .card-img-top {
+    max-width: 100%; /* Resmi kartın genişliği kadar boyutlandır */
+    height: auto; /* Oranları koru */
+}
+.card-img-top {
+    width: 500px; /* Belirli bir genişlik değeri ayarla */
+    height: 400px; /* Belirli bir yükseklik değeri ayarla */
+    object-fit: cover; /* Resmi boyutlara sığdır ve taşan kısmı kes */
+}
+</style>

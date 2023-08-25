@@ -108,7 +108,6 @@ namespace otel_management.Controllers
         {
             ProfileLoader();
             return View("Profile");
-
             
         }
         void ProfileLoader()
