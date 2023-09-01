@@ -30,6 +30,7 @@
 				<th>Hizmet Detayları</th>
 				<th>Hizmet Fiyatı</th>
 				<th>Rezerv Durumu</th>
+				<th>Kilit Durumu</th>
 				<th>Operasyonlar</th>
 			</tr>
 		</thead>
@@ -50,6 +51,16 @@
 									{
 										<i class="fa-solid fa-check fa-beat" style="color: #00ff1e;"></i>
 									}</td>
+							<td>
+								@if (@service.Lock == true)
+								{
+													<i class="fa-solid fa-lock " style="color: #ff0000;"></i>
+								}
+								@if (@service.Lock == false)
+								{
+													<i class="fa-solid fa-check " style="color: #00ff1e;"></i>
+								}
+							</td>
 							<td class="text-and">
 									<a asp-action="RezervService" asp-route-id="@service.Id" class="btn btn-info btn-sm text-white" onclick="return confirm('@service.ServiceName adlı hizmetin rezerv değişikliğini yapmak istediğinize emin misiniz?')"><i class="fa-regular fa-cross fa-bounce fa-xs"></i> Rezerv Değiştir</a>
 								<a asp-action="EditService" asp-route-id="@service.Id" class="btn btn-info btn-sm text-white"><i class="fa fa-edit me-2"></i>Düzenle</a>

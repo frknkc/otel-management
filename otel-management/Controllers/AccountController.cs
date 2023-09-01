@@ -32,9 +32,13 @@ namespace otel_management.Controllers
             if (ModelState.IsValid)
             {
                 User user = _databaseCntx.Users.SingleOrDefault(x => x.Username.ToLower() == model.KullanıcıAd.ToLower());
-                    //Users.SingleOrDefault(x => x.Username.ToLower() == model.KullanıcıAd.ToLower() && x.Password == model.KullanıcıSifre);
+                //Users.SingleOrDefault(x => x.Username.ToLower() == model.KullanıcıAd.ToLower() && x.Password == model.KullanıcıSifre);
+                if (user.Lock==true)
+                {
+					ModelState.AddModelError("", "Kullanıcı silinmiştir!!!");
+				}
 
-                if (user != null )
+                else if (user != null )
                 {
                     List<Claim> claims = new List<Claim>();
                     claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));

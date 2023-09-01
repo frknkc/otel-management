@@ -17,7 +17,6 @@ namespace otel_management.Controllers
         {
             _databaseContext = databaseContext;
             _mapper = imapper;
-
         }
         public IActionResult Hizmetler()
         {
@@ -30,6 +29,7 @@ namespace otel_management.Controllers
             ServicePrice = x.ServicePrice,
             IsAvaliable = x.IsAvaliable,
             Id = x.Id,
+            Lock=x.Lock,
         }).ToList();
 
             return View(model);
@@ -45,6 +45,7 @@ namespace otel_management.Controllers
             ServicePrice=x.ServicePrice,
             IsAvaliable=x.IsAvaliable,
             Id=x.Id,
+            Lock=x.Lock,
         }).ToList();
 
             return View(model);
@@ -71,8 +72,7 @@ namespace otel_management.Controllers
                 service.ServicePrice= model.ServicePrice; 
                 service.IsAvaliable= model.IsAvaliable;
                 service.Id=model.Id;
-
-               
+                service.Lock=model.Lock;
                 _databaseContext.Services.Add(service);
                 _databaseContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
@@ -109,10 +109,18 @@ namespace otel_management.Controllers
         public IActionResult DeleteService(int id)
         {
             Service service = _databaseContext.Services.Find(id);
-
+            
             if (service != null)
             {
-                _databaseContext.Services.Remove(service);
+                if (service.Lock==true)
+                {
+                    service.Lock = false;
+                }
+                else
+                {
+                    service.Lock = true;
+                }
+
                 _databaseContext.SaveChanges();
             }
             return RedirectToAction(nameof(Index));

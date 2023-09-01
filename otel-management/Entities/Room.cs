@@ -14,7 +14,7 @@ namespace otel_management.Entities
         public bool IsAvailable { get; set; } = true;
         public string CheckInDate { get; set; }
         public string CheckOutDate { get; set; }
-
+        public bool Lock { get; set; }
         public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }

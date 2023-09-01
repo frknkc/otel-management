@@ -1,5 +1,4 @@
-﻿
-@using otel_management.Entities;
+﻿@using otel_management.Entities;
 @model List<RezervModel>
 @{
 	ViewData["Title"] = "Rezervasyonlarım";
@@ -47,10 +46,9 @@
 									<td>@rezerv.ServicePrice</td>
 									<td>@rezerv.CheckInDate</td>
 									<td>@rezerv.CheckOutDate</td>
-
-								<td class="text-and">
+									<td class="text-and">
 										<a asp-action="EditRoom" asp-route-id="@rezerv.Id" class="btn btn-info btn-sm text-white"><i class="fa fa-edit me-2"></i>Düzenle</a>
-											<a asp-action="DeleteRoom" asp-route-id="@rezerv.Id"class="btn btn-info btn-sm text-white" onclick="return confirm('@rezerv.RoomNumber numaralı odayı silmek istediğinizden emin misiniz?')"><i class="fa fa-edit me-2"></i>Sil</a>
+										<a asp-action="DeleteRoom" asp-route-id="@rezerv.Id"class="btn btn-info btn-sm text-white" onclick="return confirm('@rezerv.RoomNumber numaralı odayı silmek istediğinizden emin misiniz?')"><i class="fa fa-edit me-2"></i>Sil</a>
 								</td>
 							</tr>
 				}

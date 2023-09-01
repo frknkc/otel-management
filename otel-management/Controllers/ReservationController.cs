@@ -25,6 +25,7 @@ namespace otel_management.Controllers
         .Select(x => new ReservationViewModel
         {
             Id = x.Id,
+            
             RoomId = x.RoomId,  
             CheckInDate = x.CheckInDate,
             CheckOutDate = x.CheckOutDate,

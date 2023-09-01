@@ -28,6 +28,7 @@ namespace otel_management.Controllers
             Email = x.Email,
             Role = x.Role,
             CreatedAt = x.CreatedAt,
+            Lock=x.Lock,
         }).ToList();
 
             return View(model);
@@ -53,6 +54,7 @@ namespace otel_management.Controllers
                 user.Role = model.Role;
                 user.FullName = model.FullName;
                 user.Password = model.Password;
+                user.Lock=model.Lock;
                 _databaseContext.Users.Add(user);
                _databaseContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
@@ -94,7 +96,15 @@ namespace otel_management.Controllers
 
             if (user!=null)
             {
-                _databaseContext.Users.Remove(user);
+                if (user.Lock==true)
+                {
+                    user.Lock = false;
+
+                }
+                else
+                {
+                    user.Lock = true;
+                }
                 _databaseContext.SaveChanges(); 
             }
             return RedirectToAction(nameof(Index));

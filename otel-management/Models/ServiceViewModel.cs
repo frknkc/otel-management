@@ -10,7 +10,7 @@ namespace otel_management.Models
         public string ServiceDetail { get; set; }
 		public string? ServicePrice { get; set; }
         public bool IsAvaliable { get; set; } 
-
+        public bool Lock { get; set; }
 
     }
 }

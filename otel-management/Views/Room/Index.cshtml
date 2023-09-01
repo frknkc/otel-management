@@ -30,6 +30,7 @@
 				<th>Oda Detayları</th>
 				<th>Oda Fiyatı</th>
 				<th>Rezerv Durumu</th>
+				<th>Kilit Durumu</th>
 				<th>Operasyonlar</th>
 			</tr>
 		</thead>
@@ -51,8 +52,16 @@
 													<i class="fa-solid fa-check fa-beat" style="color: #00ff1e;"></i>
 											}
 									</td>
+										<td>@if (@room.Lock == true)
+											{
+												<i class="fa-solid fa-lock" style="color: #ff0000;"></i>
+											}
+											@if (@room.Lock == false)
+											{
+													<i class="fa-solid fa-check" style="color: #00ff1e;"></i>
+											}</td>
 								<td class="text-and">
-									<a asp-action="RezervRoom" asp-route-id="@room.Id" class="btn btn-info btn-sm text-white"onclick="return confirm('@room.RoomNumber numaralı odanın rezerv değişikliğini yapmak istediğinize emin misiniz?')"><i class="fa-regular fa-cross fa-bounce fa-xs"></i> Rezerv Değiştir</a>
+									<a asp-action="RezervRoom" asp-route-id="@room.Id" class="btn btn-info btn-sm text-white"onclick="return confirm('@room.RoomNumber numaralı odanın rezerv değişikliğini yapmak istediğinize emin misiniz?')">Rezerv Değiştir</a>
 									<a asp-action="EditRoom" asp-route-id="@room.Id" class="btn btn-info btn-sm text-white"><i class="fa fa-edit me-2"></i>Düzenle</a>
 									<a asp-action="DeleteRoom" asp-route-id="@room.Id"class="btn btn-info btn-sm text-white" onclick="return confirm('@room.RoomNumber numaralı odayı silmek istediğinizden emin misiniz?')"><i class="fa fa-edit me-2"></i>Sil</a>
 								</td>

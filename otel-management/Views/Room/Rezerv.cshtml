@@ -8,28 +8,55 @@
         <h1 class="display-4 border-bottom text-center"><i class="fa-solid fa-user-plus"></i> @ViewData["Title"]</h1>
     </div>
 </div>
- <div class="background">
+<div class="background">
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
 <br /><br />
 <div class="row">
     <div class="col">
-        <form method="post" style="height: 650px; width: 400px; ">
+        <form method="post" asp-for="" style="height: 650px; width: 400px; ">
             <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
 
             <div class="form-group mb-3" style="margin-top:-70px">
-                <label asp-for="CheckInDate" class="form-label">Başlangıç Tarihi</label>
-                <input asp-for="CheckInDate" type="date" class="form-control" placeholder="Oda numaranızı giriniz.." />
-                <span asp-validation-for="CheckInDate" class="text-danger small"></span>
-            </div>
+    <label asp-for="CheckInDate" class="form-label">Başlangıç Tarihi</label>
+    <input asp-for="CheckInDate" id="checkInDate" type="date" class="form-control" placeholder="Oda numaranızı giriniz.." />
+    <span asp-validation-for="CheckInDate" class="text-danger small"></span>
+</div>
 
-            <div class="form-group mb-3">
-                <label asp-for="CheckOutDate" class="form-label">Bitiş Tarihi</label>
-                <input asp-for="CheckOutDate" type="date" class="form-control" />
-                <span asp-validation-for="CheckOutDate" class="text-danger small"></span>
-            </div>
+<div class="form-group mb-3">
+    <label asp-for="CheckOutDate" class="form-label">Bitiş Tarihi</label>
+    <input asp-for="CheckOutDate" id="checkOutDate" type="date" class="form-control" />
+    <span asp-validation-for="CheckOutDate" class="text-danger small"></span>
+</div>
 
+<script>
+    const checkInDateInput = document.getElementById('checkInDate');
+    const checkOutDateInput = document.getElementById('checkOutDate');
+
+    checkInDateInput.addEventListener('change', () => {
+        if (checkOutDateInput.value !== '' && checkOutDateInput.value < checkInDateInput.value) {
+            checkOutDateInput.value = '';
+        }
+    });
+
+    checkOutDateInput.addEventListener('change', () => {
+        if (checkInDateInput.value !== '' && checkOutDateInput.value < checkInDateInput.value) {
+            checkOutDateInput.value = '';
+        }
+    });
+</script>
+    
+            @*@foreach (CreateRezervModel item in Model)
+            {
+                 <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Default checkbox
+                  </label>                      
+                </div>
+            }*@
+             
             <div class="form-group mb-3">
                 <label asp-for="TotalPrice" class="form-label">Toplam Ücret</label>
                 <input asp-for="TotalPrice" class="form-control" placeholder="Oda detaylarını giriniz.." />

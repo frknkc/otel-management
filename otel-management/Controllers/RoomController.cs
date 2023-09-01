@@ -34,6 +34,7 @@ namespace otel_management.Controllers
 			IsAvailable = x.IsAvailable,
 			CheckOutDate = x.CheckOutDate,
 			CheckInDate = x.CheckInDate,
+			Lock=x.Lock,
 		}).ToList();
 				
 			return View(model);
@@ -54,6 +55,7 @@ namespace otel_management.Controllers
             IsAvailable = x.IsAvailable,
 			CheckOutDate = x.CheckOutDate,
 			CheckInDate = x.CheckInDate,
+			Lock=x.Lock,
         }).ToList();
 
             return View(model);
@@ -113,6 +115,7 @@ namespace otel_management.Controllers
 				room.BedCount = model.BedCount;
 				room.CheckInDate = room.CheckInDate;
 				room.CheckOutDate = room.CheckOutDate;
+
 				_databaseContext.Rooms.Add(room);
 				_databaseContext.SaveChanges();
 				return RedirectToAction(nameof(Index));
@@ -152,8 +155,16 @@ namespace otel_management.Controllers
 
 			if (rooms != null)
 			{
-				_databaseContext.Rooms.Remove(rooms);
-				_databaseContext.SaveChanges();
+				if (rooms.Lock==true)
+				{
+					rooms.Lock = false;
+
+                }
+				else
+				{
+                    rooms.Lock = true;
+                }
+                _databaseContext.SaveChanges();
 			}
 			return RedirectToAction(nameof(Index));
 		}
@@ -178,8 +189,6 @@ namespace otel_management.Controllers
 
 		public IActionResult Rezerv()
 		{
-
-
             return View();
         }
 
@@ -192,7 +201,21 @@ namespace otel_management.Controllers
             User user = _databaseContext.Users.SingleOrDefault(x => x.Id == userid);
             Room rooms = _databaseContext.Rooms.Find(id);
             rooms.IsAvailable = true;
-            var rezarvasyon = new Reservation
+			
+			//ServiceViewModel ser = (ServiceViewModel)_databaseContext.Services
+			//.Select(x => new ServiceViewModel
+			//{
+			//	ServiceName = x.ServiceName,
+			//	ServiceDetail = x.ServiceDetail,
+			//	ServicePhoto = x.ServicePhoto,
+			//	ServicePrice = x.ServicePrice,
+			//	IsAvaliable = x.IsAvaliable,
+			//	Id = x.Id,
+			//});
+
+
+
+			var rezarvasyon = new Reservation
 			{
 				UserId = userid,
 				RoomId = odaId,

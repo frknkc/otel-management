@@ -5,11 +5,62 @@
 
 <div class="container mt-5 text-center">
     <h1>Hizmetlerimiz</h1>
-    <h2 >Aşağıda kartlarda rezervasyon yaparken ekleyebileceğimiz hizmetlerimiz listelenmektedir.</h2> <h2>Lütfen rezervasyon yaparken istediğiniz hizmeti seçiniz.  </h2>
+	<h2 >Aşağıda kartlarda rezervasyon yaparken ekleyebileceğimiz hizmetlerimiz listelenmektedir.Sağ sol butonlarıyla hizmetlerimizi görüntüleyebilirsiniz.</h2> <br />
     <div class="row">
-        @foreach (ServiceViewModel hizmet in Model)
+        <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+                @{
+                    bool isFirst = true;
+                    @foreach (ServiceViewModel hizmet in Model)
+                    {
+                        @if (hizmet.IsAvaliable == false && hizmet.Lock == false && isFirst == true)
+                        {
+                            <div class="carousel-item active">
+                                <div class="col-20 mb-4 ">
+
+                                    <img src="~/serviceimg/@hizmet.ServicePhoto" class="card-img-top" alt="@hizmet.ServiceName">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@hizmet.ServiceName</h5>
+                                        <p class="card-text">@hizmet.ServiceDetail</p>
+                                        <p class="card-text">Hizmet Ücreti -> @hizmet.ServicePrice </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @if (hizmet.IsAvaliable == false && hizmet.Lock == false && isFirst == false)
+                        {
+                                                    <div class="carousel-item">
+
+                                                    <div class="col-20 mb-4 ">
+
+                                                 <img src="~/serviceimg/@hizmet.ServicePhoto" class="card-img-top" alt="@hizmet.ServiceName">
+                                                 <div class="card-body">
+                                                    <h5 class="card-title">@hizmet.ServiceName</h5>
+                                                    <p class="card-text">@hizmet.ServiceDetail</p>
+                                                    <p class="card-text">Hizmet Ücreti -> @hizmet.ServicePrice </p>
+                                                  </div>
+                                           </div>
+                                 </div>
+                        }
+                        
+                        isFirst = false;
+
+                    }
+                }
+                
+  
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+       @* @foreach (ServiceViewModel hizmet in Model)
             {
-                @if (hizmet.IsAvaliable==false)
+                @if (hizmet.IsAvaliable==false && hizmet.Lock==false)
             {
                          <div class="col-md-4 mb-4">
                             <div class="card text-dark text-center uppercase-text">
@@ -22,7 +73,7 @@
                             </div>
                         </div>
             }
-            }
+            }*@
     </div>
 </div>
 <style>

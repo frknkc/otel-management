@@ -25,7 +25,4 @@ namespace otel_management.Models
         public int ServiceId { get; set; }
 
     }
-
-
-
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using otel_management.Data;
 
@@ -11,9 +12,11 @@ using otel_management.Data;
 namespace otel_management.Migrations
 {
     [DbContext(typeof(DatabaseCntx))]
-    partial class DatabaseCntxModelSnapshot : ModelSnapshot
+    [Migration("20230831061958_5_mig")]
+    partial class _5_mig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,9 +117,6 @@ namespace otel_management.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("IsAvaliable")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Lock")
                         .HasColumnType("bit");
 
                     b.Property<string>("ServiceDetail")
