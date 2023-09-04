@@ -72,25 +72,54 @@ namespace otel_management.Controllers
         {
             int userid = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             User user = _databaseContext.Users.SingleOrDefault(x => x.Id == userid);
+		
+                var rezervas = (from rezerv in _databaseContext.Reservations
+                                join uye in _databaseContext.Users on rezerv.UserId equals uye.Id
+                                join oda in _databaseContext.Rooms on rezerv.RoomId equals oda.Id
+                                join servis in _databaseContext.Services on rezerv.ServiceId equals servis.Id
+                                where rezerv.UserId == userid
+                                select new RezervModel
+                                {
+                                    Id = rezerv.Id,
+                                    RoomNumber = oda.RoomNumber,
+                                    BedCount = oda.BedCount,
+                                    RoomPrice = oda.RoomPrice,
+                                    ServiceName = servis.ServiceName,
+                                    ServicePrice = servis.ServicePrice,
+                                    CheckInDate = rezerv.CheckInDate,
+                                    CheckOutDate = rezerv.CheckOutDate,
+                                    TotalPrice = rezerv.TotalPrice
+                                }).ToList();
+                return View(rezervas);
+           
+			
+        }
+
+        public IActionResult AdminRezervation()
+        {
+            int userid = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            User user = _databaseContext.Users.SingleOrDefault(x => x.Id == userid);
 
             var rezervas = (from rezerv in _databaseContext.Reservations
-                           join uye in _databaseContext.Users on rezerv.UserId equals uye.Id
-                           join oda in _databaseContext.Rooms on rezerv.RoomId equals oda.Id
-                           join servis in _databaseContext.Services on rezerv.ServiceId equals servis.Id
-                           where rezerv.UserId == userid
-                           select new RezervModel
-                           {
-                               Id = rezerv.Id,
-                               RoomNumber = oda.RoomNumber,
-                               BedCount = oda.BedCount,
-                               RoomPrice = oda.RoomPrice,
-                               ServiceName = servis.ServiceName,
-                               ServicePrice = servis.ServicePrice,
-                               CheckInDate = rezerv.CheckInDate,
-                               CheckOutDate = rezerv.CheckOutDate,
-                               TotalPrice = rezerv.TotalPrice
-                           }).ToList();
+                            join uye in _databaseContext.Users on rezerv.UserId equals uye.Id
+                            join oda in _databaseContext.Rooms on rezerv.RoomId equals oda.Id
+                            join servis in _databaseContext.Services on rezerv.ServiceId equals servis.Id
+                            select new RezervModel
+                            {
+                                Id = rezerv.Id,
+                                RoomNumber = oda.RoomNumber,
+								username=uye.Username,
+                                BedCount = oda.BedCount,
+                                RoomPrice = oda.RoomPrice,
+                                ServiceName = servis.ServiceName,
+                                ServicePrice = servis.ServicePrice,
+                                CheckInDate = rezerv.CheckInDate,
+                                CheckOutDate = rezerv.CheckOutDate,
+                                TotalPrice = rezerv.TotalPrice
+                            }).ToList();
             return View(rezervas);
+
+
         }
         public IActionResult CreateRoom()
 		{
@@ -158,7 +187,6 @@ namespace otel_management.Controllers
 				if (rooms.Lock==true)
 				{
 					rooms.Lock = false;
-
                 }
 				else
 				{
@@ -168,6 +196,7 @@ namespace otel_management.Controllers
 			}
 			return RedirectToAction(nameof(Index));
 		}
+		
 		public IActionResult RezervRoom(int id)
 		{
 			Room rooms = _databaseContext.Rooms.Find(id);
@@ -186,7 +215,13 @@ namespace otel_management.Controllers
 			}
 			return RedirectToAction(nameof(Index));
 		}
-
+		public IActionResult DeleteReservation(int id)
+		{
+			Room room = _databaseContext.Rooms.FirstOrDefault(r => r.RoomNumber == id.ToString());
+			room.IsAvailable = false; 
+			_databaseContext.SaveChanges();
+			return RedirectToAction(nameof(Index));
+		}
 		public IActionResult Rezerv()
 		{
             return View();

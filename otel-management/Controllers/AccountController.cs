@@ -59,7 +59,6 @@ namespace otel_management.Controllers
                 {
                     ModelState.AddModelError("", "Kullanıcı Adı veya Şifre yanlış!!!");
                     ViewData["result"] = "LoginX";
-
                 }
             }
             return View(model);
@@ -154,7 +153,7 @@ namespace otel_management.Controllers
             ProfileLoader();
             return View("Profile");
         }
-
+        
         [HttpPost]
         public IActionResult ProfileChangeMail([Required]string? mail)
         {
@@ -162,11 +161,9 @@ namespace otel_management.Controllers
             {
                 int userid = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
                 User user = _databaseCntx.Users.SingleOrDefault(x => x.Id == userid);
-
                 user.Email = mail;
                 _databaseCntx.SaveChanges();
                 ViewData["result"] = "MailChanged";
-
             }
             ProfileLoader();
             return View("Profile");

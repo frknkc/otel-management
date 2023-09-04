@@ -1,5 +1,58 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using otel_management.Entities;
+@model List<RezervModel>
 @{
+	ViewData["Title"] = "Kullanıcı Rezervasyonları";
 }
+
+
+	<div class="row">
+<div class="col">
+	<h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+</div><br />
+
+@*
+<div class="row">
+	<div class="col">
+		<a asp-action="MakeRezervation" class="btn btn-primary btn-sm"><i class="fa fa-plus me-2"></i>Rezervasyon Ekle</a>
+	</div>
+</div>*@
+
+
+<div class="row">
+<div class="col">
+	<table class="table table-hover-blue table-sm text-white">	
+		<thead>
+			<tr class="text-center">
+				<th>Kullanıcı</th>
+				<th>Oda Numarası</th>
+				<th>Oda Kişi Sayısı</th>
+				<th>Oda Fiyatı</th>
+				<th>Hizmet Adı</th>
+				<th>Hizmet Fiyatı</th>
+				<th>Giriş Tarihi</th>
+				<th>Çıkış Tarihi</th>
+				<th>Operasyonlar</th>
+
+			</tr>
+		</thead>
+		<tbody>
+				@foreach (RezervModel rezerv in Model)
+				{
+										<tr class="text-center">
+											<td>@rezerv.username</td>
+											<td>@rezerv.RoomNumber</td>
+											<td>@rezerv.BedCount</td>
+											<td>@rezerv.RoomPrice</td>
+											<td>@rezerv.ServiceName</td>
+											<td>@rezerv.ServicePrice</td>
+											<td>@rezerv.CheckInDate</td>
+											<td>@rezerv.CheckOutDate</td>
+											<td class="text-and">
+											<a asp-action="DeleteReservation" asp-route-id="@rezerv.RoomNumber" class="btn btn-info btn-sm text-white" onclick="return confirm('@rezerv.RoomNumber numaralı odayı silmek istediğinizden emin misiniz?')"><i class="fa fa-edit me-2"></i>Sil</a></td>
+									</tr>
+				}
+		</tbody>
+	</table>
+</div>
+</div>

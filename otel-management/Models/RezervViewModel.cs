@@ -6,6 +6,8 @@ namespace otel_management.Models
     {
         public int Id { get; set; }
         public string? RoomNumber { get; set; }
+
+        public string?  username { get; set; }
         public int BedCount { get; set; }
         public string? RoomPrice { get; set; }
         public string ServiceName { get; set; }
